@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import { FONTAMILY } from '../theme'
+import { FONTAMILY } from '../../theme'
 
 const ProfileScreen = () => {
   return (

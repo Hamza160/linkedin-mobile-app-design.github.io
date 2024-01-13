@@ -1,6 +1,10 @@
 export const COLORS = {
   blue: '#0A66C2',
   darkGray: '#B9B9B9',
+  lightGray: '#8C8C8C',
+  lightBlue: '#DCE6F1',
+  white: '#FFFFFF',
+  black: '#000',
 };
 
 export const FONTAMILY = {
