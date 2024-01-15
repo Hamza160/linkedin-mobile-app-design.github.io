@@ -7,9 +7,10 @@ import {
   width,
 } from '../../theme/metrics';
 import {COLORS, FONTAMILY} from '../../theme';
-import Avatar from '../../components/Avatar';
 import CustomIcon from '../../components/CustomIcon';
-
+import LikeImage from '../../assets/images/likes.png';
+import ClapImage from '../../assets/images/claps.png';
+import BulbImage from '../../assets/images/blub.png';
 interface PostProps {
   post: Post;
 }
@@ -41,6 +42,34 @@ const Post: React.FC<PostProps> = ({post}) => {
           </View>
         </View>
         {/* Post Body */}
+        <View style={styles.body}>
+          {post.text && (
+            <Text style={styles.postText}>
+              {post.text.substring(0, 150)}{' '}
+              <Text style={styles.seeMore}>...see more</Text>
+            </Text>
+          )}
+          {post.imageUrl && (
+            <Image
+              source={{uri: post.imageUrl}}
+              alt={post.user.name}
+              style={styles.postImage}
+            />
+          )}
+          <View style={styles.likeStats}>
+            <View style={styles.likeWrapper}>
+              <View style={styles.likes}>
+                <Image source={LikeImage} alt="Like" style={styles.likesIcon} />
+                <Image source={BulbImage} alt="Like" style={styles.likesIcon} />
+                <Image source={ClapImage} alt="Like" style={styles.likesIcon} />
+              </View>
+              <Text style={styles.likesCount}>{post.likes}</Text>
+            </View>
+            <Text style={styles.comments}>{post.comments} comments</Text>
+          </View>
+        </View>
+        <View style={styles.spacer} />
+        {/* Post Footer */}
         <View />
       </View>
       <View style={styles.footer} />
@@ -58,7 +87,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: horizontalScale(15),
   },
   header: {},
-  body: {},
+  body: {
+    paddingBottom: verticalScale(15),
+  },
   footer: {},
   profile: {
     paddingTop: verticalScale(17),
@@ -103,13 +134,61 @@ const styles = StyleSheet.create({
   },
   time: {
     flexDirection: 'row',
-    justifyContent:'flex-start',
-    alignItems:'center',
-    gap: horizontalScale(5)
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: horizontalScale(5),
   },
   timeText: {
     fontFamily: FONTAMILY.RobotoRegular,
     fontSize: moderateScale(17),
     color: COLORS.mediumGray,
-  }
+  },
+  postText: {
+    fontSize: moderateScale(17),
+    color: COLORS.black,
+    fontFamily: FONTAMILY.RobotoRegular,
+  },
+  seeMore: {
+    color: '#585C60',
+  },
+  postImage: {
+    width: '100%',
+    height: verticalScale(292),
+    objectFit: 'cover',
+  },
+  likeStats: {
+    marginTop: verticalScale(10),
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  likeWrapper: {
+    flexDirection: 'row',
+    gap: moderateScale(2),
+  },
+  likesCount: {
+    fontSize: moderateScale(15),
+    fontFamily: FONTAMILY.RobotoRegular,
+    color: '#585C60',
+    letterSpacing: 0.3,
+  },
+  likes: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  likesIcon: {
+    width: horizontalScale(16),
+    height: horizontalScale(16),
+  },
+  comments: {
+    fontSize: moderateScale(15),
+    fontFamily: FONTAMILY.RobotoRegular,
+    color: '#585C60',
+    letterSpacing: 0.3,
+  },
+  spacer: {
+    padding: 2,
+    backgroundColor: '#EBEBEB',
+  },
 });
